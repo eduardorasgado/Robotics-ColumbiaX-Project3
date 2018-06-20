@@ -1,2 +1,2 @@
 forward_kinematics:lwr_robot/lwr_defs:robot_mover:robot_sim
--DCATKIN_DEVEL_PREFIX=/home/canix/kuka_control_p3_columbiaX/devel -DCMAKE_INSTALL_PREFIX=/home/canix/kuka_control_p3_columbiaX/install -G Unix Makefiles
+-DCATKIN_WHITELIST_PACKAGES= -DCATKIN_DEVEL_PREFIX=/home/canix/kuka_control_p3_columbiaX/devel -DCMAKE_INSTALL_PREFIX=/home/canix/kuka_control_p3_columbiaX/install -G Unix Makefiles

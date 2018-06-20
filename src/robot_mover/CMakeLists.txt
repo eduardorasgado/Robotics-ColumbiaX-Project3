@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robot_mover)
 
 find_package(catkin REQUIRED COMPONENTS
+  roscpp
   forward_kinematics
   lwr_defs
   robot_sim

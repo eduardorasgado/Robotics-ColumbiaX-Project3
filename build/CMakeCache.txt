@@ -36,7 +36,7 @@ CATKIN_ENABLE_TESTING:BOOL=ON
 CATKIN_SKIP_TESTING:BOOL=OFF
 
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=robot_sim
+CATKIN_WHITELIST_PACKAGES:STRING=
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
@@ -276,7 +276,8 @@ cpp_common_DIR:PATH=/opt/ros/kinetic/share/cpp_common/cmake
 //Value Computed by CMake
 forward_kinematics_BINARY_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/build/forward_kinematics
 
-forward_kinematics_DIR:PATH=
+//The directory containing a CMake configuration file for forward_kinematics.
+forward_kinematics_DIR:PATH=/home/canix/kuka_control_p3_columbiaX/devel/share/forward_kinematics/cmake
 
 //Value Computed by CMake
 forward_kinematics_SOURCE_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/src/forward_kinematics
@@ -346,12 +347,13 @@ gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 lib:FILEPATH=/opt/ros/kinetic/lib/librosconsole_bridge.so
 
 //Value Computed by CMake
-lwr_defs_BINARY_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/build/lwr_robot
+lwr_defs_BINARY_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/build/lwr_robot/lwr_defs
 
-lwr_defs_DIR:PATH=
+//The directory containing a CMake configuration file for lwr_defs.
+lwr_defs_DIR:PATH=/home/canix/kuka_control_p3_columbiaX/devel/share/lwr_defs/cmake
 
 //Value Computed by CMake
-lwr_defs_SOURCE_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/src/lwr_robot
+lwr_defs_SOURCE_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/src/lwr_robot/lwr_defs
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/kinetic/share/message_filters/cmake
@@ -371,7 +373,8 @@ robot_mover_SOURCE_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/src/robot_mo
 //Value Computed by CMake
 robot_sim_BINARY_DIR:STATIC=/home/canix/kuka_control_p3_columbiaX/build/robot_sim
 
-robot_sim_DIR:PATH=
+//The directory containing a CMake configuration file for robot_sim.
+robot_sim_DIR:PATH=/home/canix/kuka_control_p3_columbiaX/devel/share/robot_sim/cmake
 
 //Dependencies for target
 robot_sim_LIB_DEPENDS:STATIC=
@@ -545,7 +548,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
