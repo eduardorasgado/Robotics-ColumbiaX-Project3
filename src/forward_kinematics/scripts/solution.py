@@ -126,9 +126,22 @@ class ForwardKinematics(object):
         all_transforms = tf.msg.tfMessage()
         # We start with the identity
         T = tf.transformations.identity_matrix()
-        
+
         # YOUR CODE GOES HERE
-        
+        print "world_link"
+        #print joint_values
+        for i in range(len(joint_values.name)):
+            print link_names[i]
+
+            print joint_values.name[i], ": ->>>>", joint_values.position[i]
+            print joints[i].axis, "/ type: ", joints[i].type
+            print joints[i].origin.xyz
+            print joints[i].origin.rpy
+            if i == len(joint_values.name)-1:
+                print link_names[i+1]
+
+        #2 MATRIXES FOR EACH JOIN.: DHENAVIT HARTENBERG NOTATION 
+
         return all_transforms
        
 if __name__ == '__main__':
