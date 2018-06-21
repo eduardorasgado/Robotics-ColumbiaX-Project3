@@ -128,9 +128,10 @@ class ForwardKinematics(object):
         T = tf.transformations.identity_matrix()
 
         # YOUR CODE GOES HERE
-        print "world_link"
+        #print "world_link"
         #print joint_values
-        for i in range(len(joint_values.name)):
+        for i in range(len(joints)):
+            """
             print link_names[i]
 
             print joint_values.name[i], ": ->>>>", joint_values.position[i]
@@ -139,8 +140,37 @@ class ForwardKinematics(object):
             print joints[i].origin.rpy
             if i == len(joint_values.name)-1:
                 print link_names[i+1]
+            """
+            try:
+                #we look for the correct index of actual joint
+                indexJV = joint_values.name.index(joints[i].name)
+                #then we got the actual position
+                actual_SimplePos = joint_values.position[indexJV]
+            except Exception as e:
+                actual_SimplePos = 0.0
 
-        #2 MATRIXES FOR EACH JOIN.: DHENAVIT HARTENBERG NOTATION 
+            if joints[i].type == 'fixed':
+                T = tf.transformations.identity_matrix()
+                messageTidentity =convert_to_message(T, link_names[i], 'world_link')
+                all_transforms.transforms.append(messageTidentity)
+                
+            
+            else:
+                #got a axis
+                angleAxis = joints[i].axis
+                
+                T = tf.transformations.concatenate_matrices(
+                    T,
+                    tf.transformations.translation_matrix(joints[i].origin.xyz),
+                    tf.transformations.quaternion_matrix(
+                        tf.transformations.quaternion_about_axis(actual_SimplePos, (angleAxis))
+                        )
+                    )
+                messageT = convert_to_message(T, link_names[i], 'world_link')
+                all_transforms.transforms.append(messageT)
+
+            
+
 
         return all_transforms
        
