@@ -141,6 +141,17 @@ class ForwardKinematics(object):
             if i == len(joint_values.name)-1:
                 print link_names[i+1]
             """
+            link_name = link_names[i]
+            joint_name = joints[i].name
+            if joint_name == 'world_link_lwr_arm_base_joint':
+                #joint_index = joint_values.name.index(joint_name)
+                T = tf.transformations.concatenate_matrices(T,tf.transformations.translation_matrix(joints[i].origin.xyz))
+                joint_rpy = joints[i].origin.rpy
+                T = tf.transformations.concatenate_matrices(T,tf.transformations.quaternion_matrix(tf.transformations.quaternion_from_euler(joint_rpy[0],joint_rpy[1],joint_rpy[2])))
+                #all_transforms.transforms.append(convert_to_message(T,link_name,'world_link'))
+                all_transforms.transforms.append(convert_to_message(T,link_name,'world_link'))
+                continue 
+
             try:
                 #we look for the correct index of actual joint
                 indexJV = joint_values.name.index(joints[i].name)
@@ -148,28 +159,26 @@ class ForwardKinematics(object):
                 actual_SimplePos = joint_values.position[indexJV]
             except Exception as e:
                 actual_SimplePos = 0.0
-
+            """
             if joints[i].type == 'fixed':
                 T = tf.transformations.identity_matrix()
                 messageTidentity =convert_to_message(T, link_names[i], 'world_link')
                 all_transforms.transforms.append(messageTidentity)
-                
+            """    
             
-            else:
-                #got a axis
-                angleAxis = joints[i].axis
-                
-                T = tf.transformations.concatenate_matrices(
-                    T,
-                    tf.transformations.translation_matrix(joints[i].origin.xyz),
-                    tf.transformations.quaternion_matrix(
-                        tf.transformations.quaternion_about_axis(actual_SimplePos, (angleAxis))
-                        )
+           
+            #got a axis
+            angleAxis = joints[i].axis
+            
+            T = tf.transformations.concatenate_matrices(
+                T,
+                tf.transformations.translation_matrix(joints[i].origin.xyz),
+                tf.transformations.quaternion_matrix(
+                    tf.transformations.quaternion_about_axis(actual_SimplePos, (angleAxis))
                     )
-                messageT = convert_to_message(T, link_names[i], 'world_link')
-                all_transforms.transforms.append(messageT)
-
-            
+                )
+            messageT = convert_to_message(T, link_names[i], 'world_link')
+            all_transforms.transforms.append(messageT)
 
 
         return all_transforms
